@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Edit Customer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/edit_customer.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Edit Customer</h1>
+
+    <form method="POST">
+
+        <label>Customer Name</label>
+
+        <input
+            type="text"
+            name="customer_name"
+            value="{{ customer.CustomerName }}"
+            required>
+
+        <label>Email</label>
+
+        <input
+            type="email"
+            name="email"
+            value="{{ customer.Email }}"
+            required>
+
+        <label>Phone</label>
+
+        <input
+            type="text"
+            name="phone"
+            value="{{ customer.Phone }}"
+            required>
+
+        <label>Gender</label>
+
+        <select name="gender">
+
+            <option value="Male"
+            {% if customer.Gender=="Male" %}selected{% endif %}>
+            Male
+            </option>
+
+            <option value="Female"
+            {% if customer.Gender=="Female" %}selected{% endif %}>
+            Female
+            </option>
+
+        </select>
+
+        <label>City</label>
+
+        <input
+            type="text"
+            name="city"
+            value="{{ customer.City }}"
+            required>
+
+        <label>State</label>
+
+        <input
+            type="text"
+            name="state"
+            value="{{ customer.State }}"
+            required>
+
+        <button type="submit">
+
+            Update Customer
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

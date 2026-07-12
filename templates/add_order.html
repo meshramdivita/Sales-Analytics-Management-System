@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Order</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/add_order.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>Add New Order</h1>
+
+        <form method="POST">
+
+            <!-- Customer -->
+
+            <label>Customer</label>
+
+            <select name="customer_id" required>
+
+                <option value="">Select Customer</option>
+
+                {% for customer in customers %}
+
+                <option value="{{ customer.CustomerID }}">
+                    {{ customer.CustomerName }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <!-- Product -->
+
+            <label>Product</label>
+
+            <select name="product_id" id="product" required>
+
+                <option value="">Select Product</option>
+
+                {% for product in products %}
+
+                <option
+                        value="{{ product.ProductID }}"
+                        data-category="{{ product.Category }}"
+                        data-brand="{{ product.Brand }}"
+                        data-supplier="{{ product.Supplier }}"
+                        data-price="{{ product.Price }}"
+                        data-stock="{{ product.StockQuantity }}">
+
+                    {{ product.ProductName }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <!-- Category -->
+
+            <label>Category</label>
+
+            <input type="text"
+                   id="category"
+                   readonly>
+
+            <!-- Brand -->
+
+            <label>Brand</label>
+
+            <input type="text"
+                   id="brand"
+                   readonly>
+
+            <!-- Supplier -->
+
+            <label>Supplier</label>
+
+            <input type="text"
+                   id="supplier"
+                   readonly>
+
+            <!-- Price -->
+
+            <label>Price (₹)</label>
+
+            <input type="text"
+                   id="price"
+                   readonly>
+
+            <!-- Available Stock -->
+
+            <label>Available Stock</label>
+
+            <input type="text"
+                   id="stock"
+                   readonly>
+
+            <!-- Quantity -->
+
+            <label>Quantity</label>
+
+            <input type="number"
+                   id="quantity"
+                   name="quantity"
+                   min="1"
+                   value="1"
+                   required>
+
+            <!-- Total Amount -->
+
+            <label>Total Amount</label>
+
+            <input type="text"
+                   id="total"
+                   readonly>
+
+            <!-- Order Date -->
+
+            <label>Order Date</label>
+
+            <input type="date"
+                   name="order_date"
+                   value="{{ today }}"
+                   required>
+
+            <button type="submit">
+
+                Save Order
+
+            </button>
+
+        </form>
+
+        <a href="{{ url_for('sales') }}">
+
+            ← Back to Orders
+
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+
+const product=document.getElementById("product");
+const qty=document.getElementById("quantity");
+
+function updateDetails(){
+
+    const option=product.options[product.selectedIndex];
+
+    document.getElementById("category").value=option.dataset.category || "";
+    document.getElementById("brand").value=option.dataset.brand || "";
+    document.getElementById("supplier").value=option.dataset.supplier || "";
+    document.getElementById("price").value=option.dataset.price || "";
+    document.getElementById("stock").value=option.dataset.stock || "";
+
+    let price=parseFloat(option.dataset.price || 0);
+    let quantity=parseInt(qty.value || 0);
+
+    document.getElementById("total").value="₹"+(price*quantity).toLocaleString("en-IN");
+
+}
+
+product.addEventListener("change",updateDetails);
+
+qty.addEventListener("input",updateDetails);
+
+</script>
+
+</body>
+
+</html>

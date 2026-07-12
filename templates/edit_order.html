@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Order</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/add_order.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>Edit Order</h1>
+
+        <form method="POST">
+
+            <label>Customer</label>
+
+            <select name="customer_id" required>
+
+                {% for customer in customers %}
+
+                <option value="{{ customer.CustomerID }}"
+                    {% if customer.CustomerID == order.CustomerID %}selected{% endif %}>
+
+                    {{ customer.CustomerName }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <label>Product</label>
+
+            <select name="product_id" required>
+
+                {% for product in products %}
+
+                <option value="{{ product.ProductID }}"
+                    {% if product.ProductID == order.ProductID %}selected{% endif %}>
+
+                    {{ product.ProductName }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <label>Quantity</label>
+
+            <input
+                type="number"
+                name="quantity"
+                value="{{ order.Quantity }}"
+                required>
+
+            <label>Order Date</label>
+
+            <input
+                type="date"
+                name="order_date"
+                value="{{ order.OrderDate }}"
+                required>
+
+            <button type="submit">
+
+                Update Order
+
+            </button>
+
+        </form>
+
+        <a href="{{ url_for('sales') }}">
+
+            Back to Orders
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

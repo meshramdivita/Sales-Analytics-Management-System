@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Product</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/add_product.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>Add Product</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <!-- Product -->
+
+            <label>Product Name</label>
+
+            <select name="product_name" id="product" onchange="updateFields()" required>
+
+                <option value="">Select Product</option>
+
+                <option>Laptop</option>
+                <option>Monitor</option>
+                <option>CPU</option>
+                <option>Printer</option>
+                <option>Mouse</option>
+                <option>Keyboard</option>
+                <option>Headphones</option>
+                <option>Webcam</option>
+                <option>Router</option>
+                <option>SSD</option>
+                <option>HDMI Cable</option>
+                <option>USB Cable</option>
+                <option>Mouse Pad</option>
+                <option>Laptop Bag</option>
+                <option>Charger</option>
+                <option>Pendrive</option>
+                <option>Cooling Pad</option>
+                <option>Keyboard Cover</option>
+                <option>Screen Cleaner</option>
+                <option>Power Strip</option>
+
+            </select>
+
+            <!-- Category -->
+
+            <label>Category</label>
+
+            <input type="text"
+                   id="category"
+                   name="category"
+                   readonly>
+
+            <!-- Brand -->
+
+            <label>Brand</label>
+
+            <select name="brand" id="brand" required>
+
+                <option>Select Brand</option>
+
+            </select>
+
+            <!-- Price -->
+
+            <label>Price</label>
+
+            <input type="number"
+                   name="price"
+                   step="0.01"
+                   required>
+
+            <!-- Stock -->
+
+            <label>Stock Quantity</label>
+
+            <input type="number"
+                   name="stock"
+                   required>
+
+            <!-- Supplier -->
+
+            <label>Supplier</label>
+
+            <select name="supplier"
+                    id="supplier"
+                    required>
+
+                <option>Select Supplier</option>
+
+            </select>
+
+            <!-- Image -->
+
+            <label>Product Image</label>
+
+            <input type="file"
+                   name="product_image"
+                   accept="image/*">
+
+            <button type="submit">
+               💾 Save Product
+            </button>
+
+        </form>
+
+        <a href="{{ url_for('products') }}" class="back-btn">
+             ← Back to Products
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+
+const products = {
+
+"Laptop":{
+category:"Electronics",
+brands:["Dell","HP","Lenovo","Asus","Acer"],
+suppliers:["Dell India","HP India","Lenovo India"]
+},
+
+"Monitor":{
+category:"Electronics",
+brands:["LG","Samsung","Dell"],
+suppliers:["LG Electronics","Samsung India"]
+},
+
+"CPU":{
+category:"Electronics",
+brands:["Intel","AMD"],
+suppliers:["Intel India","AMD India"]
+},
+
+"Printer":{
+category:"Electronics",
+brands:["HP","Canon","Epson"],
+suppliers:["HP India","Canon India","Epson India"]
+},
+
+"Mouse":{
+category:"Accessories",
+brands:["Logitech","Dell","HP"],
+suppliers:["Logitech India","Dell India"]
+},
+
+"Keyboard":{
+category:"Accessories",
+brands:["Logitech","HP","Dell","Redragon"],
+suppliers:["Logitech India","HP India"]
+},
+
+"Headphones":{
+category:"Accessories",
+brands:["Sony","Boat","JBL"],
+suppliers:["Sony India","Boat Lifestyle"]
+},
+
+"Webcam":{
+category:"Electronics",
+brands:["Logitech","HP"],
+suppliers:["Logitech India","HP India"]
+},
+
+"Router":{
+category:"Electronics",
+brands:["TP-Link","D-Link","Netgear"],
+suppliers:["TP-Link India","D-Link India"]
+},
+
+"SSD":{
+category:"Electronics",
+brands:["Samsung","WD","Kingston"],
+suppliers:["Samsung India","WD India"]
+},
+
+"HDMI Cable":{
+category:"Accessories",
+brands:["Boat","Belkin"],
+suppliers:["ABC Electronics"]
+},
+
+"USB Cable":{
+category:"Accessories",
+brands:["Boat","Mi","Samsung"],
+suppliers:["ABC Electronics"]
+},
+
+"Mouse Pad":{
+category:"Accessories",
+brands:["Logitech","Redgear"],
+suppliers:["Tech Distributor"]
+},
+
+"Laptop Bag":{
+category:"Accessories",
+brands:["HP","Dell","Lenovo"],
+suppliers:["HP India","Dell India"]
+},
+
+"Charger":{
+category:"Accessories",
+brands:["HP","Dell","Lenovo"],
+suppliers:["HP India","Dell India"]
+},
+
+"Pendrive":{
+category:"Accessories",
+brands:["SanDisk","Kingston","HP"],
+suppliers:["SanDisk India"]
+},
+
+"Cooling Pad":{
+category:"Accessories",
+brands:["Zebronics","Cosmic Byte"],
+suppliers:["Tech Distributor"]
+},
+
+"Keyboard Cover":{
+category:"Accessories",
+brands:["Generic","HP","Dell"],
+suppliers:["ABC Electronics"]
+},
+
+"Screen Cleaner":{
+category:"Accessories",
+brands:["3M","Cleaner Kit"],
+suppliers:["ABC Electronics"]
+},
+
+"Power Strip":{
+category:"Accessories",
+brands:["Anchor","Havells"],
+suppliers:["Anchor India","Havells India"]
+}
+
+};
+
+function updateFields(){
+
+let product=document.getElementById("product").value;
+
+let category=document.getElementById("category");
+
+let brand=document.getElementById("brand");
+
+let supplier=document.getElementById("supplier");
+
+brand.innerHTML="";
+supplier.innerHTML="";
+
+if(product=="") return;
+
+category.value=products[product].category;
+
+products[product].brands.forEach(function(item){
+
+brand.innerHTML+=`<option>${item}</option>`;
+
+});
+
+products[product].suppliers.forEach(function(item){
+
+supplier.innerHTML+=`<option>${item}</option>`;
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Customer Purchase History</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/customer_history.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Customer Purchase History</h1>
+
+<div class="customer-info">
+
+    <h2>{{ customer.CustomerName }}</h2>
+
+    <p>Email : {{ customer.Email }}</p>
+
+    <p>Phone : {{ customer.Phone }}</p>
+
+    <p>City : {{ customer.City }}</p>
+
+</div>
+
+<h2>Purchase History</h2>
+
+<table>
+
+<tr>
+
+    <th>Order ID</th>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Amount</th>
+    <th>Date</th>
+
+</tr>
+
+{% for order in orders %}
+
+<tr>
+
+<td>{{ order.OrderID }}</td>
+
+<td>{{ order.ProductName }}</td>
+
+<td>{{ order.Quantity }}</td>
+
+<td>₹{{ order.TotalAmount }}</td>
+
+<td>{{ order.OrderDate }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<div class="summary">
+
+<h3>Total Orders : {{ total_orders }}</h3>
+
+<h3>Total Spent : ₹{{ total_spent }}</h3>
+
+</div>
+
+<br>
+
+<a href="{{ url_for('customers') }}">← Back</a>
+
+</div>
+
+</body>
+</html>

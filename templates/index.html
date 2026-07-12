@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sales Analytics Management System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header>
+
+        <div class="logo">
+
+            <h2>Sales Analytics</h2>
+
+        </div>
+
+        <nav>
+
+            <a href="/">Home</a>
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+
+            <a href="{{ url_for('login') }}" class="login-btn">
+                Login
+            </a>
+
+            <a href="{{ url_for('register') }}" class="register-btn">
+                Register
+            </a>
+
+        </nav>
+
+    </header>
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>Sales Analytics Management System</h1>
+
+            <h3>Analyze • Visualize • Make Better Decisions</h3>
+
+            <p>
+
+                Welcome to the Retail Sales Analytics Platform.
+
+                Analyze sales performance, monitor revenue,
+
+                track customer behavior, generate reports,
+
+                and make smarter business decisions using
+
+                powerful analytics.
+
+            </p>
+
+            <a href="{{ url_for('register') }}">
+                <button class="hero-register">
+                    Get Started
+                </button>
+            </a>
+
+            <a href="{{ url_for('login') }}">
+                <button class="hero-login">
+                    Login
+                </button>
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- About -->
+
+    <section id="about">
+
+        <h2>About Our Platform</h2>
+
+        <p>
+
+            Our Sales Analytics Management System enables organizations
+            to monitor sales performance, analyze customer behavior,
+            manage products, and generate insightful reports through
+            interactive dashboards.
+
+        </p>
+
+    </section>
+
+    <!-- Features -->
+
+    <section id="features">
+
+        <h2>Key Features</h2>
+
+        <div class="feature-container">
+
+            <div class="card">
+
+                <h3>📊 Sales Dashboard</h3>
+
+                <p>
+                    View sales performance with real-time analytics.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>👥 Customer Management</h3>
+
+                <p>
+                    Store and manage customer information efficiently.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>📦 Product Management</h3>
+
+                <p>
+                    Manage products, pricing and inventory.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>📈 Reports & Analytics</h3>
+
+                <p>
+                    Generate business reports and visualize trends.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+
+            © 2026 Sales Analytics Management System |
+            Developed by Divita Meshram
+
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

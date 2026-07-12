@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customers</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/products.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h2>Sales Analytics</h2>
+
+        <ul class="menu">
+            <li><a href="{{ url_for('dashboard') }}">🏠 Dashboard</a></li>
+            <li><a href="{{ url_for('customers') }}">👥 Customers</a></li>
+            <li><a href="{{ url_for('products') }}">📦 Products</a></li>
+            <li><a href="{{ url_for('sales') }}">🛒 Orders</a></li>
+            <li><a href="{{ url_for('reports') }}">📊 Reports</a></li>
+            <li><a href="{{ url_for('analytics') }}">📈 Analytics</a></li>
+            <li><a href="{{ url_for('audit_logs') }}">📝 Audit Logs</a></li>
+            <li><a href="{{ url_for('logout') }}">🚪 Logout</a></li>
+        </ul>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main">
+
+        <h1>Customers</h1>
+
+        <!-- Flash Message -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+
+                    <div class="message {{ category }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Top Bar -->
+
+        <div class="top-bar">
+
+            <a href="{{ url_for('add_customer') }}" class="add-btn">
+                + Add Customer
+            </a>
+
+            <form method="GET">
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search ID, Name, Email, City..."
+                    value="{{ request.args.get('search','') }}">
+
+                <button type="submit">
+                    Search
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- Table -->
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Name</th>
+
+                <th>Email</th>
+
+                <th>Phone</th>
+
+                <th>Gender</th>
+
+                <th>City</th>
+
+                <th>State</th>
+
+                <th>Action</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for customer in customers %}
+
+            <tr>
+
+                <td>{{ customer.CustomerID }}</td>
+
+                <td>{{ customer.CustomerName }}</td>
+
+                <td>{{ customer.Email }}</td>
+
+                <td>{{ customer.Phone }}</td>
+
+                <td>{{ customer.Gender }}</td>
+
+                <td>{{ customer.City }}</td>
+
+                <td>{{ customer.State }}</td>
+
+                <td>
+
+                    <a href="{{ url_for('customer_history', id=customer.CustomerID) }}"
+                          class="history">
+                          📜 History
+                    </a>
+
+                    <a href="{{ url_for('edit_customer', id=customer.CustomerID) }}" class="edit">
+                         ✏️ Edit
+                    </a>
+
+                    <a href="{{ url_for('delete_customer', id=customer.CustomerID) }}"
+                       class="delete"
+                       onclick="return confirm('Delete this customer?')">
+
+                        🗑️ Delete
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        <div class="pagination">
+             {% if page > 1 %}
+                <a href="{{ url_for('customers', page=page-1, search=search) }}">
+                    ◀ Previous
+               </a>
+            {% endif %}
+            <spam>
+                 Page {{ page }} of {{ total_pages }}
+            </spam>
+            {% if page < total_pages %}
+                <a href="{{ url_for('customers', page=page+1, search=search) }}">
+                    Next ▶
+                </a>
+             {% endif %}
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
